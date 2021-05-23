@@ -27,25 +27,31 @@ function shuffleArray(array) {
 
 function ImageShuffler (props) {
     const [images, setImages] = useState(defaultImages);
-    const [chosenDog, setChosenDog] = useState()
-    const [chosenDogs, setChosenDogs] = useState(['text'])
+    //const [chosenDog, setChosenDog] = useState()
+    const [chosenDogs, setChosenDogs] = useState([])
 
     const handleClick = (e) => {
         let updatedDogs = chosenDogs
         if (props.gameActive === true) {
-            setChosenDog(e.target.id)
-            updatedDogs.push(chosenDog)
-            setChosenDogs(updatedDogs)
+            //Tried doing this with chosenDog, wasn't working
+            let chosenPic = e.target.id
+            if (chosenDogs.includes(chosenPic)) {
+                props.endGame()
+                setChosenDogs([])
+            } else {
+                updatedDogs.push(chosenPic)
+                setChosenDogs(updatedDogs)
 
-            let newImages = shuffleArray(images);
-            setImages((images) => [...newImages]);
+                let newImages = shuffleArray(images);
+                setImages((images) => [...newImages]);
 
-            props.addScore();
+                props.addScore();
+            }
         }
     }
 
     const imageRender = images.map((value, index) => {
-        return <img src={value} key={"image" + index} alt="random goofy dog" onClick={handleClick}/>
+        return <img src={value} key={"image" + index} id={value} alt="random goofy dog" onClick={handleClick}/>
     });
 
 
