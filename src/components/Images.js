@@ -25,7 +25,7 @@ function shuffleArray(array) {
     return array
 };
 
-function ImageShuffler (props) {
+function Images (props) {
     const [images, setImages] = useState(defaultImages);
     //const [chosenDog, setChosenDog] = useState()
     const [chosenDogs, setChosenDogs] = useState([])
@@ -51,15 +51,15 @@ function ImageShuffler (props) {
     }
 
     const imageRender = images.map((value, index) => {
-        return <img src={value} key={"image" + index} id={value} alt="random goofy dog" onClick={handleClick}/>
+        return <img className={"image"} src={value} key={"image" + index} id={value} alt="random goofy dog" onClick={handleClick}/>
     });
 
 
     return (
-        <section className={"header"}>
+        <div id="imagesContainer">
             {imageRender}
-        </section>
+        </div>
     );
 }
 
-export default ImageShuffler;
+export default Images;
